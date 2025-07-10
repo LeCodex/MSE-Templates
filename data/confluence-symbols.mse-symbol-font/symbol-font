@@ -1,0 +1,17 @@
+﻿mse version: 1.0.0
+version: 2024-06-07
+short name: confluence
+position hint: 1
+icon: mem.png
+
+image font size: 90
+horizontal space: 2
+#######Custom Mana Symbols
+### Colored
+symbol:
+	code: M
+	image: mem.png
+##############################################################
+# Insert-symbol menu
+insert symbol menu:
+	item: M
