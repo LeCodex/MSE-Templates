@@ -271,6 +271,12 @@ init script:
 			reminder: "Enemy Interrupts must be installed over non-Interrupted Firewall Functions."
 		],
 		[
+			keyword: "Interval",
+			match: "Interval",
+			mode: "core",
+			reminder: "Whenever one of your installed Intervals is trashed, you may put it on top of your deck."
+		],
+		[
 			keyword: "Inverse",
 			match: "Inverse",
 			mode: "core",
