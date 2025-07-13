@@ -43,8 +43,9 @@ init script:
 				if has_reminder_text() then 440 else 355
 			else
 				if has_reminder_text() then 345 else 265
-		else 
-			if has_reminder_text() then 600 else 690
+		else if choose_type() == "script" then
+			600
+		else if has_reminder_text() then 600 else 690
 	}
 
 ############################################################## Set info fields
@@ -109,7 +110,7 @@ card style:
 		left: 24
 		top: {if choose_type() == "lambda" then if choose_style() == "L" then 298 else 207 else 96}
 		width: 697
-		height: {if choose_type() == "lambda" then if choose_style() == "L" then 715 else 806 else 681}
+		height: {if choose_type() == "lambda" then if choose_style() == "L" then 715 else 806 else if choose_type() == "script" then 915 else 681}
 		z index: 1
 		mask: {choose_mask()}
 	############################# Card type
@@ -160,10 +161,10 @@ card style:
 		line height line: 1.2
 		line height soft: 1
 	rule_text:
-		left: 142
-		top: {if choose_type() == "lambda" then 164 else 788}
-		width: 566
-		height: {if choose_type() == "lambda" then if choose_style() == "L" and not has_two_sections() then 169 else 77 else 95}
+		left: {if choose_type() == "script" then 80 else 142}
+		top: {if choose_type() == "lambda" then 164 else if choose_type() == "script" then 740 else 788}
+		width: {if choose_type() == "script" then 584 else 566}
+		height: {if choose_type() == "lambda" then if choose_style() == "L" and not has_two_sections() then 169 else 77 else if choose_type() == "script" then 200 else 95}
 		font:
 			name: Consolas
 			size: 20
@@ -206,7 +207,7 @@ card style:
 		line height soft: 1
 	condition:
 		left: 45
-		top: {if choose_type() == "lambda" then if choose_style() == "L" and not has_two_sections() then 229 else 182 else 818}
+		top: {if choose_type() == "lambda" then if choose_style() == "L" and not has_two_sections() then 229 else 182 else 816}
 		width: 63
 		height: 43
 		font:
@@ -215,6 +216,7 @@ card style:
 			scale down to: 7
 			color: #d3d3d3
 		alignment: middle center
+		visible: {choose_type() != "script"}
 		z index: 2
 	condition2:
 		left: 45
