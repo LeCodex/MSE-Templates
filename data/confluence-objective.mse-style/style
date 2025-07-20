@@ -1,0 +1,247 @@
+﻿mse version: 1.0.0
+game: confluence
+short name: Objective
+full name: Confluence Objective
+icon: card-sample.png
+position hint: 1
+
+version: 2024-06-20
+depends on:
+	package: confluence.mse-game
+	version: 2025-06-07
+
+card width: 744
+card height: 1039
+card dpi: 300
+
+# Original style by Le Codex
+############################################################## Extra scripts
+init script:
+	is_unsorted := {styling.remove_from_autocount}
+	
+	#style picker
+	choose_card := {"card.png"}
+	choose_mask := {"mask.png"}
+
+############################################################## Set info fields
+# set info style:
+# 	symbol:
+# 		variation:
+# 			name: invertedcommon
+# 			border radius: 0.10
+# 			fill type: solid
+# 			fill color:   rgb(255,255,255)
+# 			border color: rgb(0,0,0)
+# set info style:
+# 	symbol:
+# 		variation:
+# 			name: special
+# 			border radius: 0.10
+# 			fill type: solid
+# 			fill color:   rgb(155,155,155)
+# 			border color: rgb(0,0,0)
+############################################################## Extra style options
+styling field:
+	type: choice
+	name: lambda style
+	description: What style of lambda you want.
+	initial: long
+	choice: long
+	choice: short
+styling field:
+	type: choice
+	name: artist font color
+	description: Should the illustrator, copyright, and illustrator paintbrush be white or black?
+	choice: white
+	choice: black
+############################################################## Card fields
+card style:
+	############################# Background stuff
+	# border color:
+	# 	left: 0
+	# 	top: 0
+	# 	width: 744
+	# 	height:	1039
+	# 	left width: 16
+	# 	right width: 15
+	# 	top width: 13
+	# 	bottom width: 15
+	# 	z index: 4
+	############################# Image
+	image:
+		left: 24
+		top: 96
+		width: 697
+		height: 682
+		z index: 1
+		mask: {choose_mask()}
+	############################# Score
+	score:
+		left: 199
+		top: 45
+		width: 350
+		height: 350
+		font:
+			name: Consolas
+			size: 600
+			scale down to: 7
+			color: #b5cea8
+		alignment: middle center
+		z index: 2
+		padding left: 5
+		padding top: 2
+		padding right: 5
+		padding bottom: 2
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: 1
+	############################# Text box
+	reminder_text:
+		left: 50
+		top: 796
+		width: 646
+		height: 95
+		font:
+			name: Consolas
+			size: 25
+			scale down to: 7
+			color: #507340
+		symbol font:
+			name: confluence-symbols.mse-symbol-font
+			size: 20
+		alignment: middle left
+		z index: 2
+		padding left: 5
+		padding top: 2
+		padding right: 5
+		padding bottom: 2
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: 1
+	rule_text:
+		left: 50
+		top: 896
+		width: 646
+		height: 95
+		font:
+			name: Consolas
+			size: 25
+			scale down to: 7
+			color: #d3d3d3
+		symbol font:
+			name: confluence-symbols.mse-symbol-font
+			size: 20
+		alignment: middle left
+		z index: 2
+		padding left: 5
+		padding top: 2
+		padding right: 5
+		padding bottom: 2
+		line height hard: 1.2
+		line height line: 1.2
+		line height soft: 1
+	flavor_text:
+		left: 110
+		top: 681
+		width: 546
+		height: 74
+		font:
+			name: Earth Orbiter
+			size: 20
+			scale down to: 7
+			color: white
+		alignment: center middle
+		z index: 3
+		padding left: 15
+		padding top: 2
+		padding right: 15
+		padding bottom: 2
+	############################# Card sorting / numbering
+	############################# Copyright stuff
+	# illustrator:
+	# 	left: 99
+	# 	top: 570
+	# 	width: 267
+	# 	height: 14
+	# 	alignment: {if choose_style() == "A" then "center" else "left bottom"}
+	# 	z index: 2
+	# 	font:
+	# 		name: {if choose_style() == "A" then "Matrix" else "Beleren Small Caps Bold"}
+	# 		size: {if choose_style() == "A" then 11 else 8.5}
+	# 		color: {styling.artist_font_color}
+	# This was supposed to automatically do copyright, 
+	# but apparently at some point, the copyright code changed
+	# and now it doesn't work
+	copyright line:
+		left: 0
+		top: 0
+		width: 0
+		height: 0
+		alignment: center
+		z index: 2
+		visible: false
+		font:
+			name: MPlantin
+			size: 6
+			color: {styling.artist_font_color}
+	copyright:
+		left: 145
+		top: 0
+		width: 0
+		height: 14
+		z index: 2
+		alignment: center middle
+		font:
+			name: MPlantin
+			size: 7.5
+			color: white
+			weight: bold
+############################################################## Extra card fields
+extra card field:
+	type: choice
+	name: frame
+	choice: frame
+	save value: false
+	editable: false
+extra card field:
+	type: text
+	name: auto copyright
+	script: set.copyright
+	save value: false
+	editable: false
+	show statistics: false
+extra card field:
+	type: image
+	name: flavor text background
+	save value: false
+	editable: false
+	show statistics: false
+extra card style:
+	frame:
+		left: 0
+		top: 0
+		width: 744
+		height: 1039
+		z index: 0
+		render style: image
+		image: {choose_card()}
+	auto copyright:
+		left: 145
+		top: 0
+		width: 0
+		height: 14
+		z index: 2
+		alignment: center middle
+		font:
+			name: MPlantin
+			size: 7.5
+			color: white
+			weight: bold
+	flavor_text_background:
+		left: 110
+		top: 681
+		width: 546
+		height: 74
+		z index: 2
+		default: flavor-text-background.png
+		visible: {remove_tags(card.flavor_text) != ""}

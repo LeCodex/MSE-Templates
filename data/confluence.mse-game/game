@@ -38,7 +38,7 @@ init script:
 		    |[ ][^ .,]*$			# still typing...
 		    |[ ]( or | and | in | less | more | to ) # or next word is ...
 		    )
-	         )
+	     )
 		 |  <param-mana><match></param-mana>	# keyword argument that is declared as mana
 		 |  <param-cost>[ ]*<match></param-cost>	# keyword argument that is declared as cost
 		 |  <param-cost><match>,		# keyword argument that is declared as cost
@@ -47,12 +47,53 @@ init script:
 	# the rule text filter
 	#  - adds mana symbols
 	#  - makes text in parentheses italic
+	color_text :=
+		remove_tag@(tag: "<color-auto") +
+		replace@(
+		 	match: "(?i)\\d+|execut(es|ed|e|ing)|swap(s|ped|ing)?|reveal(s|ed|ing)?|look(s|ed|ing)?|repeat(s|ed|ing)?",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(255,255,255)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)draw(s|n|ing)?",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(86,194,214)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)((?<=is )|(?<=have ))trashed|(?<!your )(?<!their )trash(es|ing)?|los(es|e|t|ing)",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(197,134,192)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)((?<=is )|(?<=have ))installed|install(s|ing)?|g(et(s|ting)?|ot)|Script(s)?",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(181,206,168)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)end(s|ed|ing)? the run",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(255,153,0)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)Function(s)?|runner",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(86,156,214)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)((un)?locked )?Interrupt(s|ed)?|intruder",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(193,66,84)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)((?<=is )|(?<=have ))(un)?locked|(un)?lock(s|ing)?|shuffl(es|ed|e|ing)",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(212,194,93)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)Lambda(s)?",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(206,145,120)>&</color-auto>") +
+		replace@(
+		 	match: "(?i)Kernel(s)?",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(206,206,120)>&</color-auto>")
 	text_filter := 
 		# step 1 : remove all automatic tags
 		remove_tag@(tag: "<sym-auto>") +
 		remove_tag@(tag: "<i-auto>")   +
 		remove_tag@(tag: "<nospellcheck") +
-		remove_tag@(tag: "<color-auto") +
 		# step 2 : reminder text for keywords
 		expand_keywords@(
 			condition: {
@@ -85,50 +126,7 @@ init script:
 			match: "(<atom-reminder-expert>.*</atom-reminder-expert></kw[^>]*>)([^\n(]+)",
 			replace: "\\2\\1"
 			) +
-		replace@(
-		 	match: "\\d+|[sS]wap(s|ped|ing)?|[rR]eveal(s|ed|ing)?|[lL]ook(s|ed|ing)?|[rR]epeat(s|ed|ing)?",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(255,255,255)>&</color-auto>") +
-		replace@(
-		 	match: "[dD]raw(s|n|ing)?",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(86,194,214)>&</color-auto>") +
-		replace@(
-		 	match: "[tT]rash(es|ed|ing)?|[lL]os(es|e|t|ing)",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(197,134,192)>&</color-auto>") +
-		replace@(
-		 	match: "[iI]nstall(s|ed|ing)?|[gG](ets|et|ot|etting)",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(181,206,168)>&</color-auto>") +
-		replace@(
-		 	match: "([eE]nd(s|ed|ing)? the )?[rR]un(s|ning)?|[eE]xecut(es|ed|e|ing)",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(255,153,0)>&</color-auto>") +
-		replace@(
-		 	match: "Function(s)?|runner",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(86,156,214)>&</color-auto>") +
-		replace@(
-		 	match: "(([uU]n)?[lL]ocked )?Interrupt(s|ed)?|intruder",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(193,66,84)>&</color-auto>") +
-		replace@(
-		 	match: "([uU]n)?[lL]ock(ed|s|ing)?|[sS]huffl(es|ed|e|ing)",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(212,194,93)>&</color-auto>") +
-		replace@(
-		 	match: "Lambda(s)?",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(206,145,120)>&</color-auto>") +
-		replace@(
-		 	match: "Script(s)?",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(145,206,120)>&</color-auto>") +
-		replace@(
-		 	match: "Kernel(s)?",
-			in_context: word_context,
-		 	replace: "<color-auto:rgb(206,206,120)>&</color-auto>") +
+		color_text +
 		# step 3: automatic symbols
 		replace@(
 			match: "M+",
@@ -183,7 +181,9 @@ init script:
 			else
 				8)
 		 	+ if remove_tags(card.sub_type) == "" then 0 else 1
-		) + sort_name(card.name)
+		) * 10 +
+		(to_number(card.score) or else 0) +
+		sort_name(card.name)
 	}
 	
 	#Necessary to make magic-mana-future play nicely
@@ -211,6 +211,8 @@ init script:
 			"script"
 		else if contains(card.super_type, match:"Kernel") then
 			"kernel"
+		else if contains(card.super_type, match:"Objective") then
+			"objective"
 		else
 			"function"
 	}
@@ -220,7 +222,7 @@ init script:
 		else if choose_type() == "lambda" then
 			"\<λ>"
 		else if choose_type() == "script" then
-			"#!s"
+			"[$]"
 		else if choose_type() == "kernel" then
 			"ker"
 		else
@@ -333,13 +335,16 @@ init script:
 	]
 	choose_reminder_text := {
 		reminder_text := ""
-		for each keyword in core_keywords do (
-			if contains(card.type, match:keyword.match) then reminder_text := keyword.reminder
-		)
-		for each keyword in set.keywords do (
-			if contains(card.type, match:keyword.match) then reminder_text := keyword.reminder()
-		)
-		text_filter("(" + reminder_text + ")")
+		if (card.score == "") then (
+			for each keyword in core_keywords do (
+				if contains(card.type, match:keyword.match) then reminder_text := keyword.reminder
+			)
+			for each keyword in set.keywords do (
+				if contains(card.type, match:keyword.match) then reminder_text := keyword.reminder()
+			)
+			text_filter("(" + reminder_text + ")")
+		) else
+			"// When your P" + (if card.score == "4" then "3" else card.score) + " program finishes running succesfully:"
 	}
 	
 ############################################################## Set fields
@@ -400,6 +405,11 @@ card field:
 	name: image
 	show statistics: false
 	description: The image of the card
+############################# Objective score
+card field:
+	type: text
+	name: score
+	description: The score for the objective
 ############################# Card type
 card field:
 	type: text
@@ -417,7 +427,7 @@ card field:
 	card list name: Super Type
 	card list column: 0260
 	card list width: 150
-	default: "Function"
+	default: if card.score == "" then "Function" else "Objective"
 	script: type_filter(value, margin_code: "type")
 card field:
 	type: text
