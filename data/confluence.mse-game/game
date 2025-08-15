@@ -109,10 +109,10 @@ init script:
 				else keyword + if expand then "<atom-reminder-{mode}> ({reminder})</atom-reminder-{mode}>" }
 			) +
 		# step 7 : italic reminder text
-		replace@(
-		 	match: "[(][^)\n]*[)]?",
-			in_context: "(^|[[:space:]])<match>|<atom-keyword><match></>",
-		 	replace: "<i-auto>&</i-auto>") +
+		# replace@(
+		#  	match: "\([^)\n]*\)?",
+		# 	in_context: "(^|[[:space:]])<match>|<atom-keyword><match></>",
+		#  	replace: "<i-auto>&</i-auto>") +
 		# step 2b : move inline keywords' reminder text to the end of the line
 		replace@(
 			match: "(<atom-reminder-core>.*</atom-reminder-core></kw[^>]*>)([^\n(]+)",
