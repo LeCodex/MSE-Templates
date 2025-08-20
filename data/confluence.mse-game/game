@@ -58,7 +58,7 @@ init script:
 			in_context: word_context,
 		 	replace: "<color-auto:rgb(86,194,214)>&</color-auto>") +
 		replace@(
-		 	match: "(?i)((?<=is )|(?<=have ))trashed|(?<!your )(?<!their )trash(es|ing)?|los(es|e|t|ing)",
+		 	match: "(?i)((?<=is )|(?<=have ))trashed|(?<!your )(?<!their )(?<!’s )trash(es|ing)?|los(es|e|t|ing)",
 			in_context: word_context,
 		 	replace: "<color-auto:rgb(197,134,192)>&</color-auto>") +
 		replace@(
