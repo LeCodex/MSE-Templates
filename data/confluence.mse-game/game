@@ -240,37 +240,37 @@ init script:
 			keyword: "Callback",
 			match: "Callback",
 			mode: "core",
-			reminder: "After executing an installed Callback, you may install a Lambda from hand in its slot."
+			reminder: "After executing an installed Callback, you may install 1 Lambda from hand in its slot."
 		],
 		[
 			keyword: "Cloud",
 			match: "Cloud",
 			mode: "core",
-			reminder: "When installing a Cloud, you may first draw any of your cards installed there."
+			reminder: "When installing a Cloud, you may first draw the card you own in that slot."
 		],
 		[
 			keyword: "Coroutine",
 			match: "Coroutine",
 			mode: "core",
-			reminder: "M: Install a Coroutine if it's the top card of your trash."
+			reminder: "M: If the top card of your trash is a Coroutine, install it."
 		],
 		[
 			keyword: "Daemon",
 			match: "Daemon",
 			mode: "core",
-			reminder: "When an installed Daemon Interrupt is trashed, you may install it as a Function."
+			reminder: "When one of your installed Daemon Interrupts is trashed, you may install it as a Function."
 		],
 		[
 			keyword: "Debug",
 			match: "Debug",
 			mode: "core",
-			reminder: "When you install a Debug Function, unlock any Interrupt installed in that slot."
+			reminder: "When you install a Debug Function, unlock the Interrupt installed in that slot."
 		],
 		[
 			keyword: "Firewall",
 			match: "Firewall",
 			mode: "core",
-			reminder: "Enemy Interrupts must be installed over non-Interrupted Firewall Functions."
+			reminder: "Enemy Interrupts must be installed in slots with a Firewall Function and no Interrupt."
 		],
 		[
 			keyword: "Interval",
@@ -288,7 +288,7 @@ init script:
 			keyword: "Procedure",
 			match: "Procedure",
 			mode: "core",
-			reminder: "M: Reveal a Procedure from hand, execute its [*] effect, then trash it."
+			reminder: "M: Reveal 1 Procedure from hand, execute its [*] effect, then trash it."
 		],
 		[
 			keyword: "Recursion",
@@ -300,7 +300,7 @@ init script:
 			keyword: "Rootkit",
 			match: "Rootkit",
 			mode: "core",
-			reminder: "M: Install an installed Rootkit Function in another one of your slots."
+			reminder: "M: Install 1 of your installed Rootkit Functions in 1 of your other slots."
 		],
 		[
 			keyword: "Sentinel",
@@ -312,19 +312,19 @@ init script:
 			keyword: "Singleton",
 			match: "Singleton",
 			mode: "core",
-			reminder: "You may install an installed Singleton in one of your empty slots before it executes."
+			reminder: "Before one of your slots with no non-Interrupt cards executes, you may install 1 of your installed Singleton Functions in it."
 		],
 		[
 			keyword: "Template",
 			match: "Template",
 			mode: "core",
-			reminder: "M: Install a card from hand in the same slot as a Template Function, then get M."
+			reminder: "M: Install 1 card from hand in 1 of your slots with a Template Function, then get M."
 		],
 		[
 			keyword: "Trojan",
 			match: "Trojan",
 			mode: "core",
-			reminder: "You may trash and execute a Trojan from hand instead of executing a Function."
+			reminder: "You may trash and execute 1 Trojan from hand instead of executing a Function."
 		],
 		[
 			keyword: "Worm",
