@@ -96,7 +96,7 @@ card style:
 	name:
 		left: 55
 		top: 42
-		width: 419
+		width: 634
 		height: 50
 		alignment: middle left shrink-overflow
 		padding bottom: 0
