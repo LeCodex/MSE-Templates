@@ -50,6 +50,10 @@ init script:
 	color_text :=
 		remove_tag@(tag: "<color-auto") +
 		replace@(
+			match: "\\([^)\n]*\\)?",
+			in_context: "(^|[[:space:]])<match>|<atom-keyword><match></>",
+			replace: "<color-auto:gray>&</color-auto>") +
+		replace@(
 		 	match: "(?i)\\d+|execut(es|ed|e|ing)|swap(s|ped|ing)?|reveal(s|ed|ing)?|look(s|ed|ing)?|repeat(s|ed|ing)?",
 			in_context: word_context,
 		 	replace: "<color-auto:rgb(255,255,255)>&</color-auto>") +
@@ -88,7 +92,11 @@ init script:
 		replace@(
 		 	match: "(?i)Kernel(s)?",
 			in_context: word_context,
-		 	replace: "<color-auto:rgb(206,206,120)>&</color-auto>")
+		 	replace: "<color-auto:rgb(206,206,120)>&</color-auto>") +
+		replace@(
+		 	match: "TODO",
+			in_context: word_context,
+		 	replace: "<color-auto:rgb(255,0,0)>&</color-auto>")
 	text_filter := 
 		# step 1 : remove all automatic tags
 		remove_tag@(tag: "<sym-auto>") +
@@ -108,11 +116,6 @@ init script:
 				if mode == "pseudo" then "<i-auto>{keyword}</i-auto>"
 				else keyword + if expand then "<atom-reminder-{mode}> ({reminder})</atom-reminder-{mode}>" }
 			) +
-		# step 7 : italic reminder text
-		# replace@(
-		#  	match: "\([^)\n]*\)?",
-		# 	in_context: "(^|[[:space:]])<match>|<atom-keyword><match></>",
-		#  	replace: "<i-auto>&</i-auto>") +
 		# step 2b : move inline keywords' reminder text to the end of the line
 		replace@(
 			match: "(<atom-reminder-core>.*</atom-reminder-core></kw[^>]*>)([^\n(]+)",
